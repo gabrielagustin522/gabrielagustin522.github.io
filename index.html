@@ -1,66 +1,109 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Website</title>
+  <title>Liquid Glass Site</title>
 
   <style>
     body {
       margin: 0;
       height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+
+      /* Rainbow animated background */
       background: linear-gradient(-45deg, #ff00ff, #00ffff, #00ff88, #ffcc00);
       background-size: 400% 400%;
-      animation: bg 6s ease infinite;
-      font-family: Arial, sans-serif;
-      color: white;
-      text-align: center;
+      animation: bg 8s infinite alternate;
     }
 
     @keyframes bg {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
 
-    .box {
+    /* Glass panel */
+    .glass {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
       padding: 40px;
-      background: rgba(0,0,0,0.4);
-      border-radius: 20px;
-      box-shadow: 0 0 30px rgba(0,255,255,0.4);
+      border-radius: 25px;
+
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 0 40px rgba(0,255,255,0.3);
+
+      text-align: center;
+      color: white;
     }
 
     h1 {
-      font-size: 45px;
-      margin-bottom: 10px;
+      font-size: 40px;
     }
 
     button {
-      margin-top: 20px;
-      padding: 12px 25px;
+      margin-top: 15px;
+      padding: 10px 20px;
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      font-size: 16px;
-      background: white;
-      color: black;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      transform: scale(1.1);
-      background: black;
-      color: white;
     }
   </style>
 </head>
 
 <body>
-  <div class="box">
-    <h1>🌐 My Website</h1>
-    <p>Built with GitHub Pages</p>
-    <button onclick="alert('Website Active 🚀')">Enter</button>
+
+  <div class="glass">
+    <h1>🌈 Liquid Glass Site</h1>
+    <p>Rainbow animated UI</p>
+    <button onclick="enterGame()">Enter 3D Game</button>
   </div>
+
+  <script>
+    function enterGame() {
+      document.body.innerHTML = `
+        <div id="game"></div>
+      `;
+      loadGame();
+    }
+
+    function loadGame() {
+      const script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js";
+      script.onload = start3D;
+      document.body.appendChild(script);
+    }
+
+    function start3D() {
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
+
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(innerWidth, innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshNormalMaterial();
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+
+      camera.position.z = 3;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    }
+  </script>
+
 </body>
 </html>
