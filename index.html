@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Website</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-45deg, #ff00ff, #00ffff, #00ff88, #ffcc00);
+      background-size: 400% 400%;
+      animation: bg 6s ease infinite;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    @keyframes bg {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .box {
+      padding: 40px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,255,255,0.4);
+    }
+
+    h1 {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      background: white;
+      color: black;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background: black;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h1>🌐 My Website</h1>
+    <p>Built with GitHub Pages</p>
+    <button onclick="alert('Website Active 🚀')">Enter</button>
+  </div>
+</body>
+</html>
